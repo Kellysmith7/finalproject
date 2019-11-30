@@ -4,7 +4,14 @@ Author: Kelly Smith
 Last day updated: 12/01/19
 
 Program to create a GUI for input into the SURS contact database
-
+:param notes - Notes about the client contact
+:param contact_mode - How the client was contacted
+:param person_contacted - Client contacted
+:param  contact_date - Date of contact
+:param  engage_id  - Engagement ID from Salesforce - Not all contacts will have an engagement ID
+:param  contact_made - Was contact made - Yes or No
+:param   staff - Staff person making the contact
+:return Information will be entered into Contactdatabase.db
 """
 import tkinter
 import sqlite3
@@ -12,7 +19,8 @@ from final_project.error_class import Yesno, NotAlpha, Dateformat, NotAlphaTwo
 
 root = tkinter.Tk()
 root.title("Entry for Client Contact")
-root.geometry("700x700")
+root.geometry("500x500")
+root.configure(background='blue')
 conn = sqlite3.connect('Conactdatabase.db')
 c = conn.cursor()
 contact_date = ''
@@ -59,7 +67,7 @@ def submit():
     def employee():
         staff = staff_text.get()
         if not staff.isalpha():
-            raise NotAlpha
+            raise NotAlphaTwo
         else:
             return staff
 
@@ -84,16 +92,15 @@ def query():
     c.execute("SELECT * FROM contact")
     records = c.fetchall()
     print_records = ''
-    for record in records:
+    for record in records[-1]:
         print_records += str(record) + "\n"
-    query_label = tkinter.Label(root, text=print_records)
-    query_label.grid(row=7, column=0, columnspan=2)
+    query_label = tkinter.Label(root, bg='blue', fg='white', text=print_records)
+    query_label.grid(row=11, column=0, columnspan=2)
     conn.commit()
     conn.close()
-    # print(print_records)
 
 
-# entry
+# entry boxes
 contact_date_text = tkinter.Entry(root, width=15)
 contact_date_text.grid(row=1, column=1)
 contact_made_text = tkinter.Entry(root, width=15)
@@ -108,20 +115,20 @@ notes_text = tkinter.Entry(root, width=15)
 notes_text.grid(row=6, column=1)
 staff_text = tkinter.Entry(root, width=15)
 staff_text.grid(row=7, column=1)
-# labels
-contact_date_label = tkinter.Label(root, text="Contact Date")
+# labels for entry boxes
+contact_date_label = tkinter.Label(root, bg='blue', fg='white', text="Date of contact")
 contact_date_label.grid(row=1, column=0)
-contact_made_label = tkinter.Label(root, text="Contact Made")
+contact_made_label = tkinter.Label(root, bg='blue', fg='white', text="Was contact made (Yes or No)")
 contact_made_label.grid(row=2, column=0)
-contact_mode_label = tkinter.Label(root, text="How was contact made")
+contact_mode_label = tkinter.Label(root, bg='blue', fg='white', text="How was contact made")
 contact_mode_label.grid(row=3, column=0)
-person_contacted_label = tkinter.Label(root, text="Person you spoke with")
+person_contacted_label = tkinter.Label(root, bg='blue', fg='white', text="Person you spoke with")
 person_contacted_label.grid(row=4, column=0)
-engage_id_label = tkinter.Label(root, text="Engagement ID")
+engage_id_label = tkinter.Label(root, bg='blue', fg='white', text="Engagement ID")
 engage_id_label.grid(row=5, column=0)
-notes_label = tkinter.Label(root, text="Notes")
+notes_label = tkinter.Label(root, bg='blue', fg='white', text="Notes")
 notes_label.grid(row=6, column=0)
-staff_label = tkinter.Label(root, text="Your name")
+staff_label = tkinter.Label(root, bg='blue', fg='white', text="Your name")
 staff_label.grid(row=7, column=0)
 # buttons
 submit_btn = tkinter.Button(root, text="Add Record", command=submit)

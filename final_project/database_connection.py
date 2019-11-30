@@ -47,7 +47,6 @@ def create_contact(conn, contact):
               VALUES(?,?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, contact)
-    return cur.lastrowid
 
 
 def select_all_contacts(conn):
