@@ -47,7 +47,7 @@ def create_contact(conn, contact):
               VALUES(?,?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, contact)
-
+    return str(conn.DatabaseError)
 
 def select_all_contacts(conn):
     cur = conn.cursor()

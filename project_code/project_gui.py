@@ -15,7 +15,7 @@ Program to create a GUI for input into the SURS contact database
 """
 import tkinter
 import sqlite3
-from final_project.error_class import Yesno, NotAlpha, Dateformat, NotAlphaTwo
+from project_code.error_class import Yesno, NotAlpha, Dateformat, NotAlphaTwo
 
 root = tkinter.Tk()
 root.title("Entry for Client Contact")
