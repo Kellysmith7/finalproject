@@ -9,9 +9,9 @@ class MyTestCase(unittest.TestCase):
     def test_createcontact(self):
         conn = sqlite3.connect('Conactdatabase.db')
         contact = ('01/02/19', 'Yes', 'Email', 'Carrie', '', 'Spoke with Carrie about burden study', 'Kelly')
-        expented = "<class 'sqlite3.DatabaseError'>"
+        expected = "<class 'sqlite3.DatabaseError'>"
         actual = database_connection.create_contact(conn, contact)
-        self.assertEqual(actual, expented)
+        self.assertEqual(actual, expected)
 
     def test_invalid_staff(self):
         with self.assertRaises(Exception):
@@ -24,6 +24,10 @@ class MyTestCase(unittest.TestCase):
     def test_invalid_contactmade(self):
         with self.assertRaises(Exception):
             Yesno('01/01/19', '2', 'Email', 'Carrie', 'EID12345', 'Hi', 'Kelly')
+
+    def test_invalid_date(self):
+        with self.assertRaises(Exception):
+            Dateformat('01/01/2019', 'Yes', 'Email', 'Carrie', 'EID12345', 'Hi', 'Kelly')
 
 
 if __name__ == '__main__':
